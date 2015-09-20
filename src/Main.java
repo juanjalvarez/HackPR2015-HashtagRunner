@@ -15,6 +15,7 @@ public class Main {
 		System.out.println(System.currentTimeMillis());
 		Game game = new Game("#Hashtagrunner");
 		AppGameContainer agc = new AppGameContainer(game);
+		agc.setShowFPS(false);
 		agc.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
 		agc.setTargetFrameRate(60);
 		agc.start();

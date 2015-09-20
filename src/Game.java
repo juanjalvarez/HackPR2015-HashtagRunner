@@ -8,37 +8,49 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class Game extends StateBasedGame {
-private int score = 0;
-private int highscore = 0;
-private File scoreFile = new File("highscore.dat");
-private PrintWriter scoreWriter = new PrintWriter(scoreFile);
+
+	private int score = 0;
+	private int highscore;
 
 	public Game(String title) throws FileNotFoundException {
-		
 		super(title);
+		score = 0;
+		File scoreFile = new File("highscore.dat");
+		if (!scoreFile.exists()) {
+			PrintWriter scoreWriter = new PrintWriter(scoreFile);
+			scoreWriter.println(score);
+			scoreWriter.close();
+		}
 		Scanner reader = new Scanner(scoreFile);
-		if(!scoreFile.exists())
-			scoreWriter.println(0);
-		else
-			setHighScore(reader.nextInt());
-			
+		setHighScore(reader.nextInt());
+		reader.close();
+
 	}
-	
-	public void setScore(int sc){
+
+	public void setScore(int sc) {
+		if (sc > getHighScore())
+			try {
+				setHighScore(sc);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		score = sc;
 	}
-	
-	public int getScore(){
-		return score; 
+
+	public int getScore() {
+		return score;
 	}
-	
-	public void setHighScore(int hs){
+
+	public void setHighScore(int hs) throws FileNotFoundException {
+		File scoreFile = new File("highscore.dat");
+		PrintWriter scoreWriter = new PrintWriter(scoreFile);
 		highscore = hs;
 		scoreWriter.println(hs);
+		scoreWriter.close();
 	}
-	
-	public int getHighScore(){
-		return highscore; 
+
+	public int getHighScore() {
+		return highscore;
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public class GameState extends BasicGameState{
 	private long lastAdd;
 	private StateBasedGame game;
 	private Image background;
-	private long tick;
+	private int tick;
 	float gameSpeed;
 	private ArrayList<String> hashtagList;
 	
@@ -84,7 +84,7 @@ public class GameState extends BasicGameState{
 			gameSpeed *= 1.02;
 			lastAdd = System.currentTimeMillis();
 			float newSpeed = gameSpeed + (Main.nextInt((int) (gameSpeed/2)))-gameSpeed/2;
-			hashList.add(new HashtagObject(this, hashtagList.get(Main.nextInt(hashtagList.size()-1)), newSpeed));
+			hashList.add(new HashtagObject(hashtagList.get(Main.nextInt(hashtagList.size()-1)), newSpeed));
 		}
 		if (i.isKeyDown(Input.KEY_UP))
 			x -= 5;
@@ -99,8 +99,10 @@ public class GameState extends BasicGameState{
 			hashList.get(x).move();
 			if (!hashList.get(x).isAlive())
 				hashList.remove(x);
-			if (hashList.get(x).getHitbox().intersects(hitbox))
+			if (hashList.get(x).getHitbox().intersects(hitbox)){
+				((Game)game).setScore(tick+1);
 				game.enterState(2, new FadeOutTransition(), new FadeInTransition());
+			}
 			if(hashList.get(x).getHitbox().intersects(new Rectangle(i.getMouseX(), i.getMouseY(), 1, 1)))
 				if(i.isMousePressed(Input.MOUSE_LEFT_BUTTON))
 					try {

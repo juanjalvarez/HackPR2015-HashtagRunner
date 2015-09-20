@@ -43,6 +43,8 @@ public class MainMenuState extends BasicGameState {
 	@Override
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException {
 		background.draw(0, 0);
+		arg2.setFont(buttonFont);
+		arg2.drawString("HighScore: " + ((Game)game).getHighScore(), 10, 10);
 		arg2.setColor(Color.black);
 		arg2.setFont(headerFont2);
 		arg2.drawString("#HashtagRunner", Main.SCREEN_WIDTH/2-263, 150);

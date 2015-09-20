@@ -9,10 +9,8 @@ public class HashtagObject {
 	private float y;
 	private float speed;
 	private float size;
-	private GameState game;
 
-	public HashtagObject(GameState gameState, String text, float speed) {
-		this.game = gameState;
+	public HashtagObject(String text, float speed) {
 		this.text = text;
 		this.speed = speed;
 		size = 32;

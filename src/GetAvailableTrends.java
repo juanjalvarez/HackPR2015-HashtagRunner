@@ -50,9 +50,8 @@ public class GetAvailableTrends {
 			ArrayList<String> list = convertToHashtagList(id);
 			for (String s : list) {
 				String hashtag = s;
-				if (!hashtag.startsWith("#"))
-					hashtag = "#" + hashtag;
-				hashtagList.add(hashtag);
+				if (hashtag.startsWith("#"))
+					hashtagList.add(hashtag);
 			}
 		}
 		pw.println(hashtagList.size());
