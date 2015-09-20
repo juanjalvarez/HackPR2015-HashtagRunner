@@ -1,4 +1,7 @@
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import twitter4j.Trends;
@@ -7,10 +10,12 @@ import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 
 public class GetAvailableTrends {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 //yo
 		int[] woeid = {23424935, 2459115, 2466256, 2442047, 2379574, 2424766, 44418, 615702};
 		ArrayList<String> hashList = null;
+		File t_file = new File("files/twit_time.txt");
+		PrintWriter pw = new PrintWriter(t_file);
 		Twitter twitter = new TwitterFactory().getInstance();
 
 		// Consumer and Auth Access Token
