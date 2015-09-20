@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Random;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -17,6 +16,8 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import twitter4j.TwitterException;
 
@@ -61,7 +62,7 @@ public class GameState extends BasicGameState{
 
 	@Override
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException {
-		background.draw(-tick/4, 0);
+		background.draw();
 		arg2.drawRect(20, x, size, size);
 		for (HashtagObject obj : hashList) {
 			arg2.setFont(font);
@@ -95,7 +96,7 @@ public class GameState extends BasicGameState{
 			if (!hashList.get(x).isAlive())
 				hashList.remove(x);
 			if (hashList.get(x).getHitbox().intersects(hitbox))
-				System.exit(0);
+				game.enterState(2, new FadeOutTransition(), new FadeInTransition());
 			if(hashList.get(x).getHitbox().intersects(new Rectangle(i.getMouseX(), i.getMouseY(), 1, 1)))
 				if(i.isMousePressed(Input.MOUSE_LEFT_BUTTON))
 					try {

@@ -21,6 +21,7 @@ public class Game extends StateBasedGame {
 	public void initStatesList(GameContainer arg0) throws SlickException {
 		addState(new MainMenuState(this));
 		addState(new GameState(this));
+		addState(new GameOverState(this));
 	}
 
 }
