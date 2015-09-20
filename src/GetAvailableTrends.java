@@ -8,7 +8,7 @@ import twitter4j.auth.AccessToken;
 
 public class GetAvailableTrends {
 	public static void main(String[] args) {
-
+//yo
 		int[] woeid = {23424935, 2459115, 2466256, 2442047, 2379574, 2424766, 44418, 615702};
 		ArrayList<String> hashList = null;
 		Twitter twitter = new TwitterFactory().getInstance();
