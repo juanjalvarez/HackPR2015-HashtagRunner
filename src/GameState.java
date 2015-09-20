@@ -30,6 +30,7 @@ public class GameState extends BasicGameState{
 	private StateBasedGame game;
 	private Image background;
 	private long tick;
+	float gameSpeed;
 	private ArrayList<String> hashtagList;
 	
 
@@ -47,6 +48,7 @@ public class GameState extends BasicGameState{
 		lastAdd = 0;
 		background = new Image("textures/background.png");
 		tick=0;
+		gameSpeed = 5;
 		try {
 			hashtagList = GetAvailableTrends.getPopularHashtags();
 			System.out.println("hashtags: " + hashtagList.size());
@@ -74,8 +76,10 @@ public class GameState extends BasicGameState{
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException {
 		Input i = arg0.getInput();
 		if (System.currentTimeMillis() - lastAdd > 500) {
+			gameSpeed *= 1.02;
 			lastAdd = System.currentTimeMillis();
-			hashList.add(new HashtagObject(this, hashtagList.get(Main.nextInt(hashtagList.size()-1))));
+			float newSpeed = gameSpeed + (Main.nextInt((int) (gameSpeed/2)))-gameSpeed/2;
+			hashList.add(new HashtagObject(this, hashtagList.get(Main.nextInt(hashtagList.size()-1)), newSpeed));
 		}
 		if (i.isKeyDown(Input.KEY_UP))
 			x -= 5;

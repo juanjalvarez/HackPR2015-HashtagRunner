@@ -11,11 +11,11 @@ public class HashtagObject {
 	private float size;
 	private GameState game;
 
-	public HashtagObject(GameState gameState, String text) {
+	public HashtagObject(GameState gameState, String text, float speed) {
 		this.game = gameState;
 		this.text = text;
-		this.speed = 5 + (new Random().nextInt(4)-2);
-		this.size = 32 + (new Random().nextInt(16)-8);
+		this.speed = speed;
+		size = 32;
 		x = Main.SCREEN_WIDTH;
 		y = new Random().nextInt(Main.SCREEN_HEIGHT);
 	}
