@@ -72,4 +72,10 @@ public class HashtagObject {
 		return true;
 		//return (x + size) < 0;
 	}
+
+	public String getRawHash() {
+		if(text.startsWith("#"))
+			return text.substring(1, text.length()-1);
+		return text;
+	}
 }
