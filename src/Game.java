@@ -49,6 +49,7 @@ public class Game extends BasicGame {
 		Game game = new Game("#Hashtagrunner");
 		AppGameContainer agc = new AppGameContainer(game);
 		agc.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
+		agc.setTargetFrameRate(60);
 		agc.start();
 	}
 
