@@ -67,7 +67,7 @@ public class Game extends BasicGame {
 			if (!hashList.get(x).isAlive())
 				hashList.remove(x);
 			if (hashList.get(x).getHitbox().intersects(hitbox))
-				System.out.println("fix me");
+				System.exit(0);
 		}
 	}
 
