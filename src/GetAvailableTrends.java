@@ -11,10 +11,10 @@ import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 
 public class GetAvailableTrends {
-	public static void main(String[] args) throws FileNotFoundException {
+	public static ArrayList<String> getPopularHashtags() throws FileNotFoundException {
 		final long FIFTEEN_MIN_IN_MS = 1800000/2;
 		int[] woeid = {23424935, 2459115, 2466256, 2442047, 2379574, 2424766, 44418, 615702};
-		ArrayList<String> hashList = null;
+		ArrayList<String> hashList = new ArrayList<String>();
 		File t_file = new File("files/twit_time.txt");
 		File h_file = new File("files/tags_list.txt");
 		Scanner fr = new Scanner(t_file);
@@ -30,11 +30,8 @@ public class GetAvailableTrends {
 			
 			//Overwriting the old file
 			try {
-				hashList = new ArrayList<String>();
 				for(int id : woeid){
-				Trends trends;
-				//for(int i=0; i< woeid.length; i++){
-					trends = twitter.getPlaceTrends(id);
+				Trends trends = twitter.getPlaceTrends(id);
 				//searches for names of trending topics around the world
 					String str = trends.toString();
 					int hashIndex = 0;
@@ -72,6 +69,7 @@ public class GetAvailableTrends {
 			System.out.println("Your last request has been less than 15 minutes ago, cannot follow request yet.");
 		}
 		fr.close();
+		return hashList;
 	}
 
 }

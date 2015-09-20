@@ -1,9 +1,11 @@
 import java.awt.Desktop;
 import java.awt.Font;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -26,6 +28,7 @@ public class GameState extends BasicGameState{
 	private StateBasedGame game;
 	private Image background;
 	private long tick;
+	private ArrayList<String> hashtagList;
 	
 
 	public GameState(StateBasedGame sgb){
@@ -38,10 +41,15 @@ public class GameState extends BasicGameState{
 		x = 600;
 		size = 50;
 		Font f = new Font("Verdana", Font.BOLD, 32);
-		font = new TrueTypeFont(f, false);
+		font = new TrueTypeFont(f, true);
 		lastAdd = 0;
 		background = new Image("textures/background.png");
 		tick=0;
+		try {
+			hashtagList = GetAvailableTrends.getPopularHashtags();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -62,7 +70,7 @@ public class GameState extends BasicGameState{
 		Input i = arg0.getInput();
 		if (System.currentTimeMillis() - lastAdd > 500) {
 			lastAdd = System.currentTimeMillis();
-			hashList.add(new HashtagObject(this, "randomword"));
+			hashList.add(new HashtagObject(this, hashtagList.get(new Random().nextInt(hashtagList.size()))));
 		}
 		if (i.isKeyDown(Input.KEY_UP))
 			x -= 5;
@@ -93,7 +101,7 @@ public class GameState extends BasicGameState{
 
 	@Override
 	public int getID() {
-		return 0;
+		return 1;
 	}
 
 }
