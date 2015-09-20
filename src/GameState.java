@@ -18,6 +18,8 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import twitter4j.TwitterException;
+
 public class GameState extends BasicGameState{
 
 	private ArrayList<HashtagObject> hashList;
@@ -47,7 +49,10 @@ public class GameState extends BasicGameState{
 		tick=0;
 		try {
 			hashtagList = GetAvailableTrends.getPopularHashtags();
+			System.out.println("hashtags: " + hashtagList.size());
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
 	}
@@ -59,7 +64,7 @@ public class GameState extends BasicGameState{
 		for (HashtagObject obj : hashList) {
 			arg2.setFont(font);
 			arg2.drawRect(obj.getX(), obj.getY(), obj.getHitbox().getWidth(), obj.getHitbox().getHeight());
-			arg2.drawString("#" + obj.getText(), obj.getX(), obj.getY());
+			arg2.drawString(obj.getText(), obj.getX(), obj.getY());
 		}
 		arg2.setColor(Color.black);
 		arg2.drawString("Score: " + tick, 10, 10);
@@ -70,7 +75,7 @@ public class GameState extends BasicGameState{
 		Input i = arg0.getInput();
 		if (System.currentTimeMillis() - lastAdd > 500) {
 			lastAdd = System.currentTimeMillis();
-			hashList.add(new HashtagObject(this, hashtagList.get(new Random().nextInt(hashtagList.size()))));
+			hashList.add(new HashtagObject(this, hashtagList.get(Main.nextInt(hashtagList.size()-1))));
 		}
 		if (i.isKeyDown(Input.KEY_UP))
 			x -= 5;
