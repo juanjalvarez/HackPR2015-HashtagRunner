@@ -9,15 +9,15 @@ public class HashtagObject {
 	private float y;
 	private float speed;
 	private float size;
-	private Game game;
+	private GameState game;
 
-	public HashtagObject(Game game, String text) {
-		this.game = game;
+	public HashtagObject(GameState gameState, String text) {
+		this.game = gameState;
 		this.text = text;
 		this.speed = 5 + (new Random().nextInt(4)-2);
 		this.size = 32 + (new Random().nextInt(16)-8);
-		x = Game.SCREEN_WIDTH;
-		y = new Random().nextInt(Game.SCREEN_HEIGHT);
+		x = Main.SCREEN_WIDTH;
+		y = new Random().nextInt(Main.SCREEN_HEIGHT);
 	}
 
 	public String getText() {
