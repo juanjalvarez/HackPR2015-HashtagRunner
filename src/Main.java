@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.Random;
 
 import org.newdawn.slick.AppGameContainer;
@@ -10,7 +11,7 @@ public class Main {
 	public static final Random generator = new Random();
 
 
-	public static void main(String[] args) throws SlickException {
+	public static void main(String[] args) throws SlickException, FileNotFoundException {
 		System.out.println(System.currentTimeMillis());
 		Game game = new Game("#Hashtagrunner");
 		AppGameContainer agc = new AppGameContainer(game);
