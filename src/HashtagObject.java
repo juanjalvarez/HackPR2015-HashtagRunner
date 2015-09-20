@@ -75,7 +75,7 @@ public class HashtagObject {
 
 	public String getRawHash() {
 		if(text.startsWith("#"))
-			return text.substring(1, text.length()-1);
+			return text.substring(1, text.length());
 		return text;
 	}
 }

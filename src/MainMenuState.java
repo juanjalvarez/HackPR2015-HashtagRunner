@@ -47,7 +47,7 @@ public class MainMenuState extends BasicGameState {
 		arg2.setFont(headerFont2);
 		arg2.drawString("#HashtagRunner", Main.SCREEN_WIDTH/2-263, 150);
 		arg2.setFont(headerFont);
-		arg2.setColor(new Color(85, 172, 238));
+		arg2.setColor(Color.blue);
 		arg2.drawString("#HashtagRunner", Main.SCREEN_WIDTH/2-255, 150);
 		arg2.setColor(Color.lightGray);
 		arg2.fill(play);
