@@ -34,6 +34,8 @@ public class GameState extends BasicGameState{
 	float gameSpeed;
 	private ArrayList<String> hashtagList;
 	
+	public static final int X = 50;
+	
 
 	public GameState(StateBasedGame sgb){
 		game = sgb;
@@ -41,7 +43,7 @@ public class GameState extends BasicGameState{
 	
 	public GameState initialize() throws SlickException{
 		hashList = new ArrayList<HashtagObject>();
-		x = 600;
+		x = Main.SCREEN_HEIGHT/2;
 		size = 50;
 		Font f = new Font("Verdana", Font.BOLD, 32);
 		font = new TrueTypeFont(f, true);
@@ -67,11 +69,11 @@ public class GameState extends BasicGameState{
 	@Override
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException {
 		background.draw();
-		arg2.drawRect(20, x, size, size);
+		arg2.drawRect(X-(size/2), x-(size/2), size, size);
 		for (HashtagObject obj : hashList) {
 			arg2.setFont(font);
-			arg2.drawRect(obj.getX(), obj.getY(), obj.getHitbox().getWidth(), obj.getHitbox().getHeight());
-			arg2.drawString(obj.getText(), obj.getX(), obj.getY());
+			arg2.drawRect(obj.getX()-(obj.getHitbox().getWidth()/2), obj.getY()-(obj.getHitbox().getHeight()/2), obj.getHitbox().getWidth(), obj.getHitbox().getHeight());
+			arg2.drawString(obj.getText(), obj.getX()-(obj.getHitbox().getWidth()/2), obj.getY()-(obj.getHitbox().getHeight()/2));
 		}
 		arg2.setColor(Color.black);
 		arg2.drawString("Score: " + tick, 10, 10);
@@ -90,11 +92,11 @@ public class GameState extends BasicGameState{
 			x -= 5;
 		if (i.isKeyDown(Input.KEY_DOWN))
 			x += 5;
-		if (x + (size / 2) > Main.SCREEN_HEIGHT)
-			x = Main.SCREEN_HEIGHT-(size/2);
-		if (x - (size / 2) < 0)
-			x = size/2;
-		Rectangle hitbox = new Rectangle(20, x, size, size);
+		if (x > Main.SCREEN_HEIGHT-50)
+			x = Main.SCREEN_HEIGHT-50;
+		if (x < 50)
+			x = 50;
+		Rectangle hitbox = new Rectangle(X, x, size, size);
 		for (int x = 0; x < hashList.size(); x++) {
 			hashList.get(x).move();
 			if (!hashList.get(x).isAlive())

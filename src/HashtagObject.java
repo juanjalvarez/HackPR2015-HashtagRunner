@@ -14,7 +14,7 @@ public class HashtagObject {
 		this.text = text;
 		this.speed = speed;
 		size = 32;
-		x = Main.SCREEN_WIDTH;
+		x = Main.SCREEN_WIDTH*2;
 		y = new Random().nextInt(Main.SCREEN_HEIGHT);
 	}
 
