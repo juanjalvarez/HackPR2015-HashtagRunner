@@ -39,8 +39,7 @@ public class GameState extends BasicGameState{
 		game = sgb;
 	}
 	
-	@Override
-	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
+	public GameState initialize() throws SlickException{
 		hashList = new ArrayList<HashtagObject>();
 		x = 600;
 		size = 50;
@@ -58,6 +57,11 @@ public class GameState extends BasicGameState{
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
+		return this;
+	}
+	
+	@Override
+	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
 	}
 
 	@Override
@@ -111,6 +115,11 @@ public class GameState extends BasicGameState{
 
 	@Override
 	public int getID() {
+		try {
+			initialize();
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
 		return 1;
 	}
 
