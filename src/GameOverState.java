@@ -13,20 +13,20 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class GameOverState extends BasicGameState {
-	
+
 	private StateBasedGame game;
 	private TrueTypeFont headerFont;
 	private int tick;
 	private Rectangle mainMenuButton;
-	
-	public GameOverState(StateBasedGame game){
+
+	public GameOverState(StateBasedGame game) {
 		this.game = game;
 	}
 
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
 		headerFont = new TrueTypeFont(new Font("Verdana", Font.BOLD, 50), true);
-		mainMenuButton = new Rectangle(Main.SCREEN_WIDTH/2-210, Main.SCREEN_HEIGHT/2+100, 350, 100);
+		mainMenuButton = new Rectangle(Main.SCREEN_WIDTH / 2 - 210, Main.SCREEN_HEIGHT / 2 + 100, 350, 100);
 		tick = 0;
 	}
 
@@ -34,13 +34,14 @@ public class GameOverState extends BasicGameState {
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException {
 		arg2.setFont(headerFont);
 		arg2.setColor(Color.white);
-		arg2.drawString("You have been defeated by social media!", Main.SCREEN_WIDTH/2-580, Main.SCREEN_HEIGHT/2-50);
-		arg2.drawString("Score: " + ((Game)game).getScore(), Main.SCREEN_WIDTH/2-180, Main.SCREEN_HEIGHT/2);
+		arg2.drawString("You have been defeated by social media!", Main.SCREEN_WIDTH / 2 - 580,
+				Main.SCREEN_HEIGHT / 2 - 50);
+		arg2.drawString("Score: " + ((Game) game).getScore(), Main.SCREEN_WIDTH / 2 - 180, Main.SCREEN_HEIGHT / 2);
 		arg2.setColor(Color.lightGray);
-		if(tick>100){
+		if (tick > 100) {
 			arg2.fill(mainMenuButton);
 			arg2.setColor(Color.black);
-			arg2.drawString("Main Menu", Main.SCREEN_WIDTH/2-195, Main.SCREEN_HEIGHT/2+113);
+			arg2.drawString("Main Menu", Main.SCREEN_WIDTH / 2 - 195, Main.SCREEN_HEIGHT / 2 + 113);
 		}
 	}
 
@@ -48,10 +49,10 @@ public class GameOverState extends BasicGameState {
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException {
 		tick++;
 		Input i = arg0.getInput();
-		if(tick>100)
-			if(i.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON))
-				if(mainMenuButton.intersects(new Rectangle(i.getMouseX(), i.getMouseY(), 1, 1)))
-						game.enterState(0, new FadeOutTransition(), new FadeInTransition());
+		if (tick > 100)
+			if (i.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON))
+				if (mainMenuButton.intersects(new Rectangle(i.getMouseX(), i.getMouseY(), 1, 1)))
+					game.enterState(0, new FadeOutTransition(), new FadeInTransition());
 	}
 
 	@Override

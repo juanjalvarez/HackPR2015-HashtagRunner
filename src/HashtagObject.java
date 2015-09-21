@@ -14,7 +14,7 @@ public class HashtagObject {
 		this.text = text;
 		this.speed = speed;
 		size = 32;
-		x = Main.SCREEN_WIDTH*2;
+		x = Main.SCREEN_WIDTH * 2;
 		y = new Random().nextInt(Main.SCREEN_HEIGHT);
 	}
 
@@ -59,7 +59,7 @@ public class HashtagObject {
 	}
 
 	public Rectangle getHitbox() {
-		return new Rectangle(x, y, size * text.length(), size);
+		return new Rectangle(x, y, (text.length()*size)/2, size*2);
 	}
 
 	public void move() {
@@ -68,11 +68,10 @@ public class HashtagObject {
 
 	public boolean isAlive() {
 		return true;
-		//return (x + size) < 0;
 	}
 
 	public String getRawHash() {
-		if(text.startsWith("#"))
+		if (text.startsWith("#"))
 			return text.substring(1, text.length());
 		return text;
 	}
